@@ -1,0 +1,35 @@
+# *************************************************************
+# Example Censys Download Via SeriesID & Clean
+# -------------------------------------------------------------
+# Lookups and gets the latest dataset for a defined seriesID and
+# fileId. Missing datasets between last run and current run will 
+# be downloaded too.
+# 
+# In this example:
+# - seriesId: 443-https-rsa_export-alexa_top1mil
+# - fileId: zgrab-results
+#
+# Due to currentdate it will be run max 1 per day, if count is
+# manually increased, unlimited attempts can be done.
+# -------------------------------------------------------------
+# How to use: Change projectRoot & replace apiSecret/apiId.
+# *************************************************************
+projectName = censysSeriesCleanExample
+projectRoot = /path/to/project/root
+
+[store_censys CENSYS_STORE1]
+viaApi = True
+apiSecret = **CHANGE_TO_YOUR_ENTERPRISE_API_SECRET**
+apiId = **CHANGE_TO_YOUR_ENTERPRISE_API_ID**
+getByLatest = yes
+getMissingDatasets = yes
+seriesId = 443-https-rsa_export-alexa_top1mil
+fileId = zgrab-results
+target = censysSeriesCleanExample_dl_{{currentdate}}-{{count}}.cctf
+
+[processing_clean CENSYS_CLEAN1]
+src = censysSeriesCleanExample_dl_{{currentdate}}-{{count}}.cctf
+format = json
+keep = "ip", "domain"
+removeMissingKeys = True
+target = censysSeriesCleanExample_cleaned_{{currentdate}}-{{count}}.cctf

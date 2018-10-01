@@ -1,0 +1,38 @@
+# *************************************************************
+# Example Plot Lineplot Script Config
+# -------------------------------------------------------------
+# Produces a GroupedLineplot & ComparedLineplot out of 
+# grouped input files named example_input_grouped_[NUMBER].ccsf
+# -------------------------------------------------------------
+# How to use: Change projectRoot & copy example_input_grouped
+# files to the configured projectRoot
+# *************************************************************
+projectName = linePlotExample
+projectRoot = /path/to/project/root
+
+[visualization_line linebarGroupedlineplot]
+src = example_input_grouped_*.ccsf
+type = groupedlineplot
+dataAttribute = grouped_value
+groupNameAttribute = country_code
+threshold = 5
+lineStyle = '-'
+markerStyle = *
+showGrid = Yes
+filenamesRegexExtract = (\d)
+title =  Example linebarGroupedlineplot
+target = example_linebarGroupedlineplot.png
+
+[visualization_line linebarComparedlineplot]
+src = example_input_grouped_*.ccsf
+type = comparedlineplot
+dataAttribute = grouped_value
+groupNameAttribute = country_code
+threshold = 5
+lineStyle = '-'
+markerStyle = *
+colormap = rainbow
+showGrid = No
+filenamesRegexExtract = (\d)
+title =  Example linebarGroupedlineplot
+target = example_linebarGroupedlineplo.png

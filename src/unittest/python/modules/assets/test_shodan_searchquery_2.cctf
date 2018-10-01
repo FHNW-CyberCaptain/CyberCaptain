@@ -1,0 +1,4 @@
+{"hostnames": [], "port": 80, "location": {"country_code": "CH"}, "ip_str": "1.1.1.1"}
+{"hostnames": [], "port": 443, "location": {"country_code": "JP"}, "ip_str": "1.1.1.2"}
+{"hostnames": [], "port": 443, "location": {"country_code": "DE"}, "ip_str": "1.1.1.3"}
+{"hostnames": [], "port": 80, "location": {"country_code": "US"}, "ip_str": "1.1.1.4"}

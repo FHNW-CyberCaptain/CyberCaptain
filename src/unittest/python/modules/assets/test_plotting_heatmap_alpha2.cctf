@@ -1,0 +1,9 @@
+{"country_code":"US", "grouped_value": 3403}
+{"country_code":"CH", "grouped_value": 2000}
+{"country_code":"DE", "grouped_value": 403}
+{"country_code":"FR", "grouped_value": 100}
+{"country_code":"IT", "grouped_value": 50}
+{"country_code":"RU", "grouped_value": 600}
+{"country_code":"ZZ", "grouped_value": 1000}
+{"country_code":"MX", "grouped_value": 6000}
+{"country_code":"-99", "grouped_value": 1000}

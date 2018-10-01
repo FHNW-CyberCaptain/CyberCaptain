@@ -1,0 +1,44 @@
+# *************************************************************
+# Example Clean & Filter & Group & Bar
+# -------------------------------------------------------------
+# Cleans the local file, filters it for the OpenSSH versions,
+# groups it by its version and finally displays a bar chart.
+# -------------------------------------------------------------
+# How to use: Change projectRoot & copy example_input_data_1.ccsf
+# to the projectRoot.
+# *************************************************************
+projectName = cleanFilterGroupBarPlotExample
+projectRoot = /path/to/project/root
+
+[processing_clean LOCAL_CLEAN1]
+src = example_input_data_1.ccsf
+format = json
+keep = "ip", "data.xssh.server_id.software"
+removeMissingKeys = True
+target = cleanFilterGroupBarPlotExample_cleaned.cctf
+
+[processing_filter LOCAL_FILTER1]
+src = cleanFilterGroupBarPlotExample_cleaned.cctf
+filterby = "data.xssh.server_id.software"
+rule = "RE OpenSSH_([5-9]|\d{2,})"
+target = cleanFilterGroupBarPlotExample_filtered.cctf
+
+[processing_group LOCAL_GROUP1]
+src = cleanFilterGroupBarPlotExample_filtered.cctf
+groupby = "data.xssh.server_id.software"
+target = cleanFilterGroupBarPlotExample_grouped.cctf
+
+[visualization_bar LOCAL_BAR1]
+src = cleanFilterGroupBarPlotExample_grouped.cctf
+type = groupedbarplot
+dataAttribute = count
+groupNameAttribute = group
+ylabel = "# of versions"
+xlabel = "Version Names"
+threshold = 3
+rotateXTicks = 90
+horizontal = no
+figureSize = 20,15
+#colormapAscending=True
+title = title
+target = cleanFilterGroupBarPlotExample_plot.png

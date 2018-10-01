@@ -1,0 +1,20 @@
+# *************************************************************
+# Example Country Code IP Mapper Module
+# -------------------------------------------------------------
+# Lookups Minecraft data via Shodan API, cleans the data, groups
+# the data and finally displays it on the map according to their
+# server location (Limit set to 1000 datasets).
+# -------------------------------------------------------------
+# How to use: Change projectRoot & copy example_input_data_1.ccsf
+# to the defined projectRoot & define the location for the
+# MaxMind GeoLite2-Country .mmdb-File.
+# *************************************************************
+projectName = countryMapperExample
+projectRoot = /path/to/project/root
+
+[processing_country COUNTRY_MAP_NAME]
+src = example_input_data_1.ccsf
+ipInputAttribute = ip
+outputAttribute = country_code
+maxMindDbPath = **CHANGE_TO_MMDB_LOCATION**
+target = countryMapperExample_output.cctf

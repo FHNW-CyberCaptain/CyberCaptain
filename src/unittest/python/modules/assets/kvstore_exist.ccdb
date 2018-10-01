@@ -1,0 +1,9 @@
+testvalue1 = Test
+testvalue2 = 1
+testvalue3 = test1, test2, test3
+testvalue4 = True
+
+[test_section]
+testvalue1 = Test2
+testvalue2 = 2
+testvalue3 = test2, test3, test4

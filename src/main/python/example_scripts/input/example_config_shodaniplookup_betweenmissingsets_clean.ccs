@@ -1,0 +1,33 @@
+# *************************************************************
+# Example Shodan IPLookup By Latest & Get Between Missing Datasets
+# -------------------------------------------------------------
+# Lookups the host infos given from shodan for a certain IP.
+# The result will be cleaned and only the country code and
+# vulns kept. Due to the configured 'getMissingDatasets',
+# not processed datasets from the last run to the current run
+# will be processed too.
+# -------------------------------------------------------------
+# How to use: Change projectRoot & replace API key. With the auto
+# placeholder {{currentdatetime}} the lookup will happen on every run. 
+# But as the shodan module remembers previous runs, it will not run 
+# again if there is not a new dataset. For specific datasets use
+# the attribute 'getByDatasetTs' instead of 'getByLatest'.
+# *************************************************************
+projectName = shodanIpLookupExample2
+projectRoot = /path/to/project/root
+
+[store_shodan SHODAN2]
+apiKey = **CHANGE_TO_YOUR_ENTERPRISE_API_KEY**
+type = ip_lookup
+getByLatest = True
+getMissingDatasets = True
+ip = 147.86.2.17
+port = 80
+target = shodanIpLookupExample2_output_{{currentdatetime}}.cctf
+
+[processing_clean CLEAN_VULNS_COUNTRY2]
+src = shodanIpLookupExample2_output_{{currentdatetime}}.cctf
+format = json
+keep = "http.server"
+removeMissingKeys = True
+target = shodanIpLookupExample2_cleaned_{{currentdatetime}}.cctf

@@ -1,0 +1,40 @@
+################################################################
+# Define all modules which should be available in CyberCaptain #
+# placeholder_name = module.location, class_name               #
+################################################################
+
+# Store
+store_local = cybercaptain.store.local, store_local
+store_censys = cybercaptain.store.censys, store_censys
+
+# Processing
+processing_clean = cybercaptain.processing.clean, processing_clean
+processing_filter = cybercaptain.processing.filter, processing_filter
+processing_group = cybercaptain.processing.group, processing_group
+
+# Visualization
+visualization_bar = cybercaptain.visualization.bar, visualization_bar
+visualization_line = cybercaptain.visualization.line, visualization_line
+
+# Export
+# TBD
+
+################################################################
+# Define all modules which can have a wildcard as the SRC(s)   #
+# wildcard_src_modules = placeholder_name, ...                 #
+################################################################
+wildcard_src_modules = visualization_bar, visualization_line
+
+################################################################
+# Define all modules which the TARGET cannot be used as a SRC  #
+# restricted_target_modules = placeholder_name, ...            #
+################################################################
+restricted_target_modules = visualization_bar, visualization_line
+
+#######################################################################
+# Define all modules which have a condition where SRC can be empty    #
+# This does not mean that there is no condition where a SRC is needed #
+# If SRC is needed it has to be checked in the validation method      #
+# no_src_modules = placeholder_name, ...                           #
+#######################################################################
+no_src_modules = store_censys

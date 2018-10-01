@@ -1,0 +1,25 @@
+# *************************************************************
+# Example Map Plot
+# -------------------------------------------------------------
+# Plots a grouped file containing the IP country code (A2 or A3)
+# to a worldmap (For europe change map argument).
+# -------------------------------------------------------------
+# How to use: Change projectRoot and run. With the custom place-
+# holder {{count}} it's possible to load the 2nd, 3d, ... file
+# and create a new map plot for it.
+# *************************************************************
+projectName = mapPlotExample
+projectRoot = /path/to/project/root
+
+[visualization_map HEATMAP_COUNT_BY_COUNTRY]
+src = example_input_grouped_{{count}}.ccsf
+map = world
+type = heatmap
+colormap = OrRd
+countryCodeAttribute = country_code
+groupedValueAttribute = grouped_value
+displayLegend = yes
+displayLabels = no
+labelsThreshold = 1
+title = Example Map Plot
+target = example_map_plot_{{count}}.png

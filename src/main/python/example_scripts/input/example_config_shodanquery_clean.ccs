@@ -1,0 +1,31 @@
+# *************************************************************
+# Example Shodan Query Lookup & Clean
+# -------------------------------------------------------------
+# Looks up the query apache via the SHODAN API and stops after 
+# 4 results. The results are then cleaned by the next step and
+# only the key "ip_str" will be kept. As the automatic place-
+# holder {{currentdate}} is defined, the run will lookup the
+# data every day as on the same day the files are existing.
+# -------------------------------------------------------------
+# How to use: Change projectRoot & replace API key. If the 
+# frequency for the lookup should be raised, change the currentdate 
+# placeholder to currentdatetime or a custom placeholder which will 
+# be manually passed on every run.
+# *************************************************************
+projectName = shodanQueryCleanExample
+projectRoot = /path/to/project/root
+
+[store_shodan shodanTaskName]
+apiKey = **CHANGE_TO_YOUR_ENTERPRISE_API_KEY**
+type = search_query
+query = apache
+limit = 5
+retries = 10
+target = shodan_query_output_{{currentdate}}.cctf
+
+[processing_clean cleanVulnsTaskName]
+src = shodan_query_output_{{currentdate}}.cctf
+format = json
+keep = "ip_str"
+removeMissingKeys = True
+target = shodan_query_cleaned_{{currentdate}}.cctf

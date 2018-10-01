@@ -1,0 +1,108 @@
+# *************************************************************
+# Example Plot Barplot Script Config
+# -------------------------------------------------------------
+# Produces all possible barplot types out of grouped input
+# files grouped input files named example_input_grouped_[NUMBER].ccsf
+# -------------------------------------------------------------
+# How to use: Change projectRoot & copy example_input_grouped
+# files to the configured projectRoot
+# *************************************************************
+projectName = barPlotExample
+projectRoot = /path/to/project/root
+
+[visualization_bar BAR_TEST]
+src = example_input_grouped_*.ccsf
+type = histogram
+dataAttribute = grouped_value
+ylabel = ylabel
+xlabel = xlabel
+threshold = 3
+title = title
+target = histogram.png
+
+[visualization_bar BAR_TEST3]
+src = example_input_grouped_*.ccsf
+type = groupedbarplot
+dataAttribute = grouped_value
+groupNameAttribute = country_code
+ylabel = ylabel
+xlabel = xlabel
+zlabel = zlabel
+threshold = 3
+horizontal = no
+figureSize = 20,15
+#colormapAscending=True
+title = title
+target = groupedbarplot.png
+
+[visualization_bar BAR_TEST31]
+src = example_input_grouped_*.ccsf
+type = comparedbarplot
+dataAttribute = grouped_value
+groupNameAttribute = country_code
+ylabel = ylabel
+xlabel = xlabel
+zlabel = zlabel
+threshold = 3
+horizontal = no
+rotateXTicks = 90
+#colormapAscending=True
+showLegend = no
+showGrid=Yes
+title = title
+target = comparedbarplot.png
+
+[visualization_bar BAR_TEST32]
+src = example_input_grouped_*.ccsf
+type = comparedbarplot
+dataAttribute = grouped_value
+groupNameAttribute = country_code
+ylabel = ylabel
+xlabel = xlabel
+zlabel = zlabel
+threshold = 3
+horizontal = yes
+rotateXTicks = 90
+#colormapAscending=True
+showLegend = no
+showGrid=Yes
+title = title
+target = comparedbarplot_horiz.png
+
+[visualization_bar BAR_TEST2]
+src = example_input_grouped_*.ccsf
+type = barplot3d
+dataAttribute = grouped_value
+groupNameAttribute = country_code
+ylabel = Time
+xlabel = Country
+zlabel = Count
+threshold = 3
+#colormapAscending=True
+showYAxisFileNames = True
+filenamesRegexExtract = (\d)
+title =  Minecraft Servers Countries Over Time
+target = barplot3d.png
+
+[visualization_bar BAR_TEST4]
+src = example_input_grouped_*.ccsf
+type = barplotcomparedstacked
+dataAttribute = grouped_value
+groupNameAttribute = country_code
+ylabel = Time
+threshold = 3
+horizontal = no
+scaledTo100 = Yes
+title =  Minecraft Servers Countries Over Time
+target = barplotcomparedstacked.png
+
+[visualization_bar BAR_TEST5]
+src = example_input_grouped_*.ccsf
+type = barplotgroupedstacked
+dataAttribute = grouped_value
+groupNameAttribute = country_code
+threshold = 3
+horizontal = no
+scaledTo100 = Yes
+title =  Minecraft Servers Count Over Time
+target = barplotgroupedstacked.png

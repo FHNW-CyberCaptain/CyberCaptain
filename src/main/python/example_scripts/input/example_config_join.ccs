@@ -1,0 +1,17 @@
+# *************************************************************
+# Example Join Module Script Config
+# -------------------------------------------------------------
+# Joins a different existing file to the given src
+# -------------------------------------------------------------
+# How to use: Change projectRoot & copy example_input_grouped
+# files to the configured projectRoot.
+# *************************************************************
+projectName = joinExample
+projectRoot = /path/to/project/root
+
+[processing_join joinTaskName]
+src = example_input_data_1.ccsf
+joinwith = example_input_data_2.ccsf
+left-joinon = "ip"
+right-joinon = "ip"
+target = joinExample_joined.cctf

@@ -1,0 +1,37 @@
+# *************************************************************
+# Example Censys Via API & getByDate & between missing sets
+# & clean the results for only IP and Domain
+# -------------------------------------------------------------
+# Lookups and gets the censys data via a defined date. The date
+# will be auto-replaced by CyberCaptain. Missing datasets between
+# last and current run will be downloaded too. 
+# 
+# In this example:
+# - date: {{currentdate}} # %d%m%Y
+# - seriesId: 443-https-rsa_export-alexa_top1mil
+# - fileId: zgrab-results
+#
+# Due to currentdate it will be run max 1 per day, if count is
+# manually increased, unlimited attempts can be done.
+# -------------------------------------------------------------
+# How to use: Change projectRoot & replace apiSecret/apiId.
+# *************************************************************
+projectName = censysByDateExample
+projectRoot = /path/to/project/root
+
+[store_censys CENSYS_STORE1]
+viaApi = True
+apiSecret = **CHANGE_TO_YOUR_ENTERPRISE_API_SECRET**
+apiId = **CHANGE_TO_YOUR_ENTERPRISE_API_ID**
+getByDate = {{currentdate}} # %d%m%Y
+getMissingDatasets = yes
+seriesId = 443-https-rsa_export-alexa_top1mil
+fileId = zgrab-results
+target = censysByDateExample_dl_{{currentdate}}-{{count}}.cctf
+
+[processing_clean CENSYS_CLEAN1]
+src = censysByDateExample_dl_{{currentdate}}-{{count}}.cctf
+format = json
+keep = "ip", "domain"
+removeMissingKeys = True
+target = censysByDateExample_cleaned_{{currentdate}}-{{count}}.cctf

@@ -1,0 +1,48 @@
+# *************************************************************
+# Example Shodan Query & Clean & Group & Map
+# -------------------------------------------------------------
+# Lookups Minecraft data via Shodan API, cleans the data, groups
+# the data and finally displays it on the map according to their
+# server location (Limit set to 1000 datasets).
+# -------------------------------------------------------------
+# How to use: Change projectRoot & replace API key. With the auto
+# placeholder {{currentdate}} its possible to run this daily. 
+# If it should be more frequent its possible to use a custom 
+# placeholder as {{count}} and manually change it on each run or 
+# use {{currentdatetime}} which is based on seconds.
+# *************************************************************
+projectName = queryCleanGroupMapExample
+projectRoot = /path/to/project/root
+
+[store_shodan SHODAN_GET_MINECRAFT_SERVERS]
+apiKey = **CHANGE_TO_YOUR_ENTERPRISE_API_KEY**
+type = search_query
+query = "Minecraft Server port:25565"
+limit = 5
+retries = 10
+target = queryCleanGroupMapExample_lookup_{{currentdate}}.cctf
+
+[processing_clean CLEAN_ONLY_LOCATION__OPTS_DATA_VERSION_AND_IP]
+src = queryCleanGroupMapExample_lookup_{{currentdate}}.cctf
+format = json
+keep = "location.country_code3", "data", "version", "ip_str", "opts"
+removeMissingKeys = True
+target = queryCleanGroupMapExample_cleaned_{{currentdate}}.cctf
+
+[processing_group GROUP_BY_COUNTRY_CODE]
+src = queryCleanGroupMapExample_cleaned_{{currentdate}}.cctf
+groupby = "location.country_code3"
+target = queryCleanGroupMapExample_grouped_{{currentdate}}.cctf
+
+[visualization_map HEATMAP_COUNT_BY_COUNTRY]
+src = queryCleanGroupMapExample_grouped_{{currentdate}}.cctf
+map = world
+type = heatmap
+colormap = viridis_r
+countryCodeAttribute = group
+groupedValueAttribute = count
+displayLegend = yes
+displayLabels = yes
+labelsThreshold = 1
+title = Minecraft Servers All Over The World (Limited to 1000)
+target = queryCleanGroupMapExample_{{currentdate}}.png

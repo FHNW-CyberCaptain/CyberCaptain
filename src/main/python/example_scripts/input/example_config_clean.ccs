@@ -1,0 +1,20 @@
+# *************************************************************
+# Example Clean Module Script Config
+# -------------------------------------------------------------
+# Cleans the input file line for line and only keeps the server
+# ssh raw id and its IP. If a key is missing in a dataset it
+# skips this dataline and will continue with the next.
+# -------------------------------------------------------------
+# How to use: Change projectRoot & copy example_input_grouped
+# files to the configured projectRoot. Pass the placeholder
+# count=n to the script so that it will load the specific file.
+# *************************************************************
+projectName = cleanExample
+projectRoot = /path/to/project/root
+
+[processing_clean cleanTaskName]
+src = example_input_data_{{count}}.ccsf
+format = json
+keep = "data.xssh.server_id.raw", "ip"
+ignoreMissingKeys = True
+target = cleaned_{{count}}.cctf

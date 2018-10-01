@@ -1,0 +1,35 @@
+projectName = "SSH_ANALYSE"
+projectRoot = {{test_output_path}}
+
+[store_local LOCAL_STORE1]
+src = ../input_data_10.ccsf
+format = "json"
+target = ssh_local_{{currentdatetime}}-{{count}}.cctf
+
+[processing_clean LOCAL_CLEAN1]
+src = ssh_local_{{currentdatetime}}-{{count}}.cctf
+format = json
+keep = "ip", "data.xssh.server_id.software"
+removeMissingKeys = True
+target =test1000-{{count}}.ccsf
+
+[processing_filter LOCAL_FILTER1]
+src = test1000-{{count}}.ccsf
+filterby = "data.xssh.server_id.software"
+rule = "RE OpenSSH_([5-9]|\d{2,})"
+target = ssh_local_filter_openssh_{{currentdatetime}}-{{count}}.cctf
+
+[processing_group LOCAL_GROUP1]
+src = ssh_local_filter_openssh_{{currentdatetime}}-{{count}}.cctf
+groupby = "data.xssh.server_id.software"
+target = mvp_final_{{currentdatetime}}-{{count}}.cctf
+
+[visualization_bar LOCAL_BAR1]
+src = mvp_final_{{currentdatetime}}-{{count}}.cctf
+title = "SSH VERSIONS"
+xlabel = "Version Names"
+ylabel = "# of versions"
+type = "barplot"
+dataAttribute = "test"
+groupNameAttribute = "test2"
+target = mvp_final_bar_{{currentdatetime}}-{{count}}.png # DEMO

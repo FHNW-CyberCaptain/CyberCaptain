@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>CyberCaptain - Path visualization {{ configName }}</title>
+<!-- Jquery - MIT Licenced -->
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
+<!-- Jquery Timing Chain http://creativecouple.github.io/jquery-timing/ - MIT Licenced -->
+<script type="text/javascript" src="http://creativecouple.github.com/jquery-timing/jquery-timing.min.js"></script>
+<!-- Jquery Touch Punch - Enable Mobile Touch - MIT Licenced -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
+<!-- Jquery Connections https://github.com/musclesoft/jquery-connections - MIT Licenced -->
+<script type="text/javascript">
+	!function(_){_.fn.connections=function(t){return"update"===t?n(m,this):"remove"===t?n(o,this):(t=_.extend(!0,{borderClasses:{},class:"connection",css:{},from:this,tag:"connection",to:this,within:":root"},t),e(t),this)},_.event.special.connections={teardown:function(t){n(o,_(this))}};var e=function(n){var r=n.borderClasses,a=n.tag,t=_(n.from),i=_(n.to),e=_(n.within);delete n.borderClasses,delete n.tag,delete n.from,delete n.to,delete n.within,e.each(function(){var e=this,o=new Array;t.each(function(){var t=this;o.push(this),i.not(o).each(function(){c(e,[t,this],a,r,n)})})})},c=function(t,e,o,n,r){var a=_.extend({position:"absolute"},r.css),i=_("<"+o+"/>",r).css(a);i.appendTo(t);var c=(i.outerWidth()-i.innerWidth())/2,s=(i.outerHeight()-i.innerHeight())/2;c<=0&&s<=0&&(c=s=1);var d={borderClasses:n,border_h:s,border_w:c,node_from:_(e[0]),node_to:_(e[1]),nodes_dom:e,css:a};"none"===i.css("border-top-style")&&(d.css.borderStyle="solid"),_.data(i.get(0),"connection",d),_.data(i.get(0),"connections",[i.get(0)]);for(var h=0;h<2;h++){var f=i.add(_.data(e[h],"connections")).get();_.data(e[h],"connections",f),1==f.length&&_(e[h]).on("connections.connections",!1)}m(i.get(0))},o=function(t){for(var e=_.data(t,"connection").nodes_dom,o=0;o<2;o++){var n=_(_.data(e[o],"connections")).not(t).get();_.data(e[o],"connections",n)}_(t).remove()},m=function(t){var e=_.data(t,"connection");if(function(t){t.rect_from=t.nodes_dom[0].getBoundingClientRect(),t.rect_to=t.nodes_dom[1].getBoundingClientRect();var e=t.cache;if(t.cache=[t.rect_from.top,t.rect_from.right,t.rect_from.bottom,t.rect_from.left,t.rect_to.top,t.rect_to.right,t.rect_to.bottom,t.rect_to.left],t.hidden=0==(t.cache[0]|t.cache[1]|t.cache[2]|t.cache[3])||0==(t.cache[4]|t.cache[5]|t.cache[6]|t.cache[7]),t.unmodified=!0,void 0===e)return t.unmodified=!1;for(var o=0;o<8;o++)if(e[o]!==t.cache[o])return t.unmodified=!1}(e),!e.unmodified){var o=e.border_h,n=e.border_w,r=(e.node_from,e.node_to,e.rect_from),a=e.rect_to,i=(r.bottom+r.top)/2,c=(a.left+a.right)/2,s=(a.bottom+a.top)/2,d=(r.left+r.right)/2,h=["right","left"];if(c<d){h=h.reverse();var f=Math.max(c-n/2,Math.min(r.right,a.right));c=d+n/2,d=f}else d-=n/2,c=Math.min(c+n/2,Math.max(r.left,a.left));var m=["bottom","top"];if(i<s){m=m.reverse();f=Math.max(i-o/2,Math.min(r.bottom,a.bottom));i=s+o/2,s=f}else i=Math.min(i,Math.max(r.top,a.top)),s-=o/2;var l=c-d,u=i-s;l<n&&(s=Math.max(s,Math.min(r.bottom,a.bottom)),i=Math.min(i,Math.max(r.top,a.top)),c=d=((d=Math.max(r.left,a.left))+(c=Math.min(r.right,a.right))-n)/2),u<o&&(d=Math.max(d,Math.min(r.right,a.right)),c=Math.min(c,Math.max(r.left,a.left)),i=s=((s=Math.max(r.top,a.top))+(i=Math.min(r.bottom,a.bottom))-o)/2),(l=c-d)<=0&&(o=0),(u=i-s)<=0&&(n=0);var b="border-"+m[0]+"-"+h[0]+"-radius: 0;border-"+m[0]+"-"+h[1]+"-radius: 0;border-"+m[1]+"-"+h[0]+"-radius: 0;";if((o<=0||n<=0)&&(b+="border-"+m[1]+"-"+h[1]+"-radius: 0;"),e.hidden)b+="display: none;";else{e.css["border-"+m[0]+"-width"]=0,e.css["border-"+h[0]+"-width"]=0,e.css["border-"+m[1]+"-width"]=o,e.css["border-"+h[1]+"-width"]=n;var g=t.getBoundingClientRect();e.css.left=t.offsetLeft+d-g.left,e.css.top=t.offsetTop+s-g.top,e.css.width=l-n,e.css.height=u-o}var v=e.borderClasses;_(t).removeClass(v[m[0]]).removeClass(v[h[0]]).addClass(v[m[1]]).addClass(v[h[1]]).attr("style",b).css(e.css)}},n=function(n,t){return t.each(function(){var t=_.data(this,"connections");if(t instanceof Array)for(var e=0,o=t.length;e<o;e++)n(t[e])})}}(jQuery);
+</script>
+
+      <style>
+		.draggable {
+			background: rgba(255, 255, 255, 0.7);
+			z-index: 99;
+			float: left;
+			min-width: 4em;
+			min-height: 3em;
+			max-width: 100%;
+			margin: 3em;
+			padding: 0.2em 1em 1em 1em;
+			border: 1px solid rgb(200, 200, 200);
+			border: 1px solid rgba(0, 0, 0, 0.2);
+			border-radius: 16px;
+			box-shadow: 2px 5px 5px rgba(0,0,0,0.2);
+		}
+      .task {
+         border:5px double;
+         z-index:2;
+         display:table;
+         border-radius:90px;
+         /*pointer-events:none;*/
+         color: rgb(200,200,200);
+         color: rgba(0,0,0,0.7);
+      }
+      .task:hover {
+         color:lightgrey;
+      }
+      .task span {
+         z-index: 1;
+         background:black;
+         color: white;
+         opacity:0.7;
+         position: absolute;
+         display:block;
+         margin: auto;
+         padding: 0.3em 0.6em;
+         border-radius:10px;
+         box-shadow: 5px 5px 5px rgba(0,0,0,0.5);
+      }
+      .task:hover span {
+         background: #55f;
+         opacity:1;
+      }
+	  .first-task {
+		box-shadow: 2px 5px 5px rgb(28, 137, 57);
+	  }
+	  .last-task {
+		box-shadow: 2px 5px 5px rgb(178, 17, 17);
+	  }
+      .connection-border-right span {
+         left: 1em;
+      }
+      .connection-border-left span {
+         right: 1em;
+      }
+      .connection-border-top span {
+         top: 1em;
+      }
+      .connection-border-bottom span {
+         bottom: 1em;
+      }
+	.task-main {
+		border-bottom: 1px solid black;
+		min-height: 20px;
+		text-align: center;
+	}
+	.task-module {
+			font-size: 13px;
+	}
+	.task-name {
+			font-weight: bold;
+	}
+	.task-nr {
+		border: 1px solid black;
+		border-radius: 50%;
+		width: 20px;
+		height: 20px;
+		margin: 0 auto;
+	}
+	.task-attributes {
+			font-size: 13px;
+	}
+	.arrow-box {
+			text-align: center;
+	}
+	.arrow-down {
+			width: 60px;
+			font-weight: bold;
+			font-size: 30px;
+	}
+    .task-attributes-key {
+        font-weight: 600;
+    }
+</style>
+<script type="text/JavaScript">
+	borderClasses = {
+          top: 'connection-border-top',
+          right: 'connection-border-right',
+          bottom: 'connection-border-bottom',
+          left: 'connection-border-left'
+      };
+   $(document).ready(function() {
+      $( ".draggable" ).draggable();
+	 	{% for path in paths %}
+			{% for task in path %}
+				{% if (not task.last and task.display) %}
+					$('#task-{{task.module}}-{{task.name}}').connections({to: '#task-{{path[loop.index].module}}-{{path[loop.index].name}}', 'class': 'task', borderClasses: borderClasses });
+				{% endif %}
+				{% if not path[loop.index-2].display and task.display %}
+					$('#task-{{path[loop.index-2].module}}-{{path[loop.index-2].name}}').connections({to: '#task-{{task.module}}-{{task.name}}', 'class': 'task', borderClasses: borderClasses });
+				{% endif %}
+				{% if task.specialConnection %}
+					{% if task.specialConnection.will_be_created %}
+						$('#task-{{task.module}}-{{task.name}}').connections({'to': '#task-{{task.specialConnection.connection_to_module}}-{{task.specialConnection.connection_to_name}}', 'class': 'task', borderClasses: borderClasses });
+					{% else %}
+						$('#task-{{task.module}}-{{task.name}}').connections({'to': '#task-{{task.module}}_SPECIAL-{{task.name}}_SPECIAL', 'class': 'task', borderClasses: borderClasses });
+					{% endif %}
+				{% endif %}				
+			{% endfor %}
+		{% endfor %}
+      //$(".draggable").connections({'class': 'fast'});
+      //$('.task').html(function(i) { return '<span>Line&nbsp;' + (13 * i + 78) + '</span>' });
+      //$('*').disableSelection();
+      $.repeat().add('connection').each($).connections('update').wait(0);
+   });
+</script>
+
+</head>
+<body>
+<h1>Path visualization {{ configName }}</h1>
+<h3>Created by CyberCaptain on {{ currentDate }}</h3>
+<br style="clear: both;" />
+{% for path in paths %}
+	{% for task in path %}
+		{% if task.display %}
+			<div id="task-{{task.module}}-{{task.name}}" class="draggable ui-widget-content {% if loop.index == 1 %}first-task{% endif %}{% if task.last %}last-task{% endif %}">
+				<div class="task-main">
+					<div class="task-nr">
+						{{loop.index}}
+					</div>
+					<div class="task-module">
+						{{task.module}}
+					</div>
+					<div class="task-name">
+						{{task.name}}
+					</div>
+				</div>
+				<div class="task-attributes">
+					<table>
+						{% for key, value in task.attributes.iteritems() %}
+						<tr>
+							<td class="task-attributes-key">{{key}}</td>
+							<td>{{value}}</td> 
+						</tr>
+						{% endfor %}
+					</table>
+				</div>
+			</div>
+			{% if task.specialConnection and not task.specialConnection.will_be_created %}
+				<div id="task-{{task.module}}_SPECIAL-{{task.name}}_SPECIAL" class="draggable ui-widget-content {% if loop.index == 1 %}first-task{% endif %}{% if task.last %}last-task{% endif %}">
+						<div class="task-main">
+							<div class="task-module">
+								**JOINED FILE**
+							</div>
+							<div class="task-name">
+								{{task.name}}
+							</div>
+						</div>
+						<div class="task-attributes">
+							<table>
+								<tr>
+									<td class="task-attributes-key">location</td>
+									<td>{{task.attributes["joinwith"]}}</td> 
+								</tr>
+							</table>
+						</div>
+				</div>
+			{% endif %}	
+		{% endif %}
+	{% endfor %}
+{% endfor %}
+</body>
+</html>
