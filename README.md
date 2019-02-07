@@ -23,7 +23,7 @@ You need to install the following tools before you can start developing or testi
 ## Recommended: One-step checkout, build & run
 After you have installed the basic dependencies you can get started by running
 ```
-sudo pip install pyb-init && pyb-init git git@gitlab.fhnw.ch:IP56/cybercaptain.git
+sudo pip install pyb-init && pyb-init git git@github.com:FHNW-CyberCaptain/CyberCaptain.git
 ```
 This will checkout and initialise CyberCaptain in a new folder.
 
